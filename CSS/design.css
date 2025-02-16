@@ -44,7 +44,12 @@ header {
   align-items: center;
 }
 .wrapper {
-  background: #FFF5EE url('imagine/Ellipse 1.svg') center 20px / cover no-repeat;
+  background-color: #FFF5EE;
+  background-image: url('/imagine/Ellipse\ 1.svg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat; 
+  background-position-y: -250px;
 
 }
 .border-nav {
@@ -57,6 +62,7 @@ header {
   align-items: center;
   justify-content: space-between;
   padding: 20px;
+  border-bottom: 50px;
 }
 
 .logo img {
