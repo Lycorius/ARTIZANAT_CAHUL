@@ -5,14 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Artizanat</title>
-    <link rel="stylesheet" href="../CSS/design.css">
+    <link rel="stylesheet" href="/CSS/design.css">
 </head>
 
 <body>
     <div class="wrapper">
-       
+
+        <!-- Header Section -->
         <header class="container border-nav">
-            
+            <!-- Left Navigation -->
             <nav class="left-nav">
                 <ul>
                     <li><a href="#">Despre noi</a></li>
@@ -20,135 +21,145 @@
                     <li><a href="#">Catalog</a></li>
                 </ul>
             </nav>
+            
+            <!-- Logo -->
             <span class="logo">
                 <img src="../imagine/LOGO.svg" alt="Logo">
             </span>
             
-                <ul class="right-nav">
-                    <li><a href="#">Contacte</a></li>
-                    <li class="language-selector">
-                        <select id="language">
-                            <option value="ro">ro</option>
-                            <option value="ru">ru</option>
-                        </select>
-                    </li>
-                </ul>
-            
+            <!-- Right Navigation -->
+            <ul class="right-nav">
+                <li><a href="#">Contacte</a></li>
+                <li><img src="/imagine\Coș.svg" alt="Coș"><a href="#">Coș</a></li>
+                <li class="language-selector"><img src="/imagine\GLOB.png" alt="GLOB">
+                    <select id="language">
+                        <option value="ro">ro</option>
+                        <option value="ru">ru</option>
+                    </select>
+                </li>
+            </ul>
         </header>
 
+        <!-- Hero Section -->
         <div class="hero container">
             <div class="hero--info">
-                
                 <h2>PĂSTRĂM TRADIȚIA</h2>
                 <h1>Platouri de lemn și veselă de lut</h1>
                 <button class="btn">Vezi catalogul</button>
             </div>
+            
+            <!-- Right and Left Images -->
             <div class="right-img">
                 <img src="/imagine/Oala din lut.svg" alt="Oala">
             </div>
             <div class="left-img">
-                <img src="/imagine/platou de lemn.svg" alt="platou">
+                <img src="/imagine/platou de lemn.svg" alt="Platou">
             </div>
-            
         </div>
 
+        <!-- About Us Section -->
         <div class="About">
-            <h2>
-                Despre noi
-            </h2>
+            <h2>Despre noi</h2>
             <h1>
-                Pasionați de obiceiuri și tradiții, am decis să împărtășim cu voi cele mai reușite produse artizanale ce ne ajută să păstram tradițiile autohtone și să îi bucurăm pe cei dragi !
+                Pasionați de obiceiuri și tradiții, am decis să împărtășim cu voi cele mai reușite produse artizanale ce ne ajută să păstram tradițiile autohtone și să îi bucurăm pe cei dragi!
             </h1>
             <div class="img About">
-                <img src="/imagine\About.svg" alt="about">
+                <img src="/imagine/About.svg" alt="About">
             </div>
         </div>
 
-  <div class="servicii">
-            <h2>
-             Servicii
-            </h2>
+        <!-- Services Section -->
+        <div class="servicii">
+            <h2>Servicii</h2>
             <h1>
                 Comercializarea veselei din lut tradiționale, platouri din lemn (frasin sau stejar), suporturi pentru vin (vinoteca) și seturi cadou la discreția clientului. Livrarea produselor prin poșta în țară și peste hotare.
             </h1>
-            <div class="carousel-container">
-              <div class="carousel">
-                  <div class="carousel-slide"><img src="/imagine\Păstrăm Tradiția\5.svg" alt="Image 5"></div>
-                  <div class="carousel-slide"><img src="/imagine\Păstrăm Tradiția\1.svg" alt="Image 1"></div>
-                  <div class="carousel-slide"><img src="/imagine\Păstrăm Tradiția\2.svg" alt="Image 2"></div>
-                  <div class="carousel-slide"><img src="/imagine\Păstrăm Tradiția\3.svg" alt="Image 3"></div>
-                  <div class="carousel-slide"><img src="/imagine\Păstrăm Tradiția\4.svg" alt="Image 4"></div>
-                  <div class="carousel-slide"><img src="/imagine\Păstrăm Tradiția\5.svg" alt="Image START"></div>
-                  <div class="carousel-slide"><img src="/imagine\Păstrăm Tradiția\1.svg" alt="Image END"></div>
-              </div>
-          </div>
-          <div class="carousel-controls">
-              <button class="carousel-btn prev">&#10094;</button>
-              <div class="carousel-indicators">
-                  <span class="indicator active" data-index="0"></span>
-                  <span class="indicator" data-index="1"></span>
-                  <span class="indicator" data-index="2"></span>
-                  <span class="indicator" data-index="3"></span>
-                  <span class="indicator" data-index="4"></span>
-              </div>
-              <button class="carousel-btn next">&#10095;</button>
-          </div>
-          <script>
-              const track = document.querySelector('.carousel');
-              const slides = document.querySelectorAll('.carousel-slide');
-              const prevBtn = document.querySelector('.prev');
-              const nextBtn = document.querySelector('.next');
-              const indicators = document.querySelectorAll('.indicator');
-              let index = 0;
-              const intervalTime = 4000;
-      
-              function updateCarousel() {
-                  track.style.transform = translateX(-${index * 100}%);
-                  indicators.forEach((indicator, i) => {
-                      indicator.classList.toggle('active', i === index);
-                  });
-              }
-      
-              function nextSlide() {
-                  index = (index + 1) % slides.length;
-                  updateCarousel();
-              }
-      
-              let autoSlide = setInterval(nextSlide, intervalTime);
-      
-              nextBtn.addEventListener('click', () => {
-                  nextSlide();
-                  resetAutoSlide();
-              });
-      
-              prevBtn.addEventListener('click', () => {
-                  index = (index - 1 + slides.length) % slides.length;
-                  updateCarousel();
-                  resetAutoSlide();
-              });
-      
-              indicators.forEach(indicator => {
-                  indicator.addEventListener('click', () => {
-                      index = parseInt(indicator.getAttribute('data-index'));
-                      updateCarousel();
-                      resetAutoSlide();
-                  });
-              });
-      
-              function resetAutoSlide() {
-                  clearInterval(autoSlide);
-                  autoSlide = setInterval(nextSlide, intervalTime);
-              }
-          </script>
-   
-    </div>
-    <div class="Contacte Container">
-      <div class="Contacte">
-        <img src="/imagine\Contact_Vinoteca.svg" alt="">
 
-      </div>
+            <!-- Carousel -->
+            <div class="carousel">
+                <div class="carousel-track">
+                    <div class="carousel-slide"><img src="/imagine/Păstrăm Tradiția/5.svg" alt="Image 5"></div>
+                    <div class="carousel-slide"><img src="/imagine/Păstrăm Tradiția/1.svg" alt="Image 1"></div>
+                    <div class="carousel-slide"><img src="/imagine/Păstrăm Tradiția/2.svg" alt="Image 2"></div>
+                    <div class="carousel-slide"><img src="/imagine/Păstrăm Tradiția/3.svg" alt="Image 3"></div>
+                    <div class="carousel-slide"><img src="/imagine/Păstrăm Tradiția/4.svg" alt="Image 4"></div>
+                </div>
+            </div>
+
+            <!-- Carousel Controls -->
+            <div class="carousel-controls">
+                <button class="carousel-btn prev">&#10094;</button>
+                <div class="carousel-indicators">
+                    <span class="indicator active" data-index="0"></span>
+                    <span class="indicator" data-index="1"></span>
+                    <span class="indicator" data-index="2"></span>
+                    <span class="indicator" data-index="3"></span>
+                    <span class="indicator" data-index="4"></span>
+                </div>
+                <button class="carousel-btn next">&#10095;</button>
+            </div>
+        </div>
+    <!-- JavaScript -->
+    <script src="/JS/animate.js"></script>
+    <!-- Contact Section -->
+    <div class="Contacte">
+        
+        <p>Contactează-ne</p>
+        <div class="Vinoteca_Contact">
+            <img src="/imagine/Contact_Vinoteca.svg" alt="">
+        </div>
+        <div class="contact-form">
+            <p>Trimite-ne un mesaj</p>
+            <form>
+                <label for="name">Nume Prenume*</label>
+                <input type="text" id="name" name="name" placeholder="Ex. Vasile Lupu" required>
+    
+                <label for="phone">Telefon*</label>
+                <input type="tel" id="phone" name="phone" placeholder="Ex. +373 79 123 456" required>
+    
+                <label for="email">Email*</label>
+                <input type="email" id="email" name="email" placeholder="Ex. VasileLupu@mall.com" required>
+    
+                <label for="message">Mesajul*</label>
+                <textarea id="message" name="message" required></textarea>
+    
+                <button type="submit">Trimite mesajul</button>
+            </form>
+        </div>
+    </body>
+    </html>
     </div>
-    <script src="/animate.js"></script>
+    <footer class="footer">
+        <div class="footer-container">
+            <h2>Informații generale</h2>
+            <nav class="footer-nav">
+                <a href="#">Acasă</a>
+                <a href="#">Catalog</a>
+                <a href="#">Despre</a>
+                <a href="#">Servicii</a>
+            </nav>
+            <hr>
+            <div class="contact-info">
+                <h3>ARTIZANAT CAHUL</h3>
+                <p>+(373) 60 132 630</p>
+                <p>Cahul, Centrul Comercial "Globus", str. 31 August 13B</p>
+            </div>
+            <div class="social-icons">
+                <div class="Icons-btn">
+                        <button class="facebook">
+                            <a href="#"><img src="/imagine\facebook.svg" alt="Facebook"><i class="fab fa-facebook"></i></a>
+                        </button>
+                        <button class="instagram">
+                            <a href="#"><img src="/imagine\instagram.svg" alt="Instagram"><i class="fab fa-instagram"></i></a>
+                        </button>
+                        <button class="tik-tok">
+                            <a href="#"><img src="/imagine\tik-tok.svg" alt="tik-tok"><i class="fab fa-tiktok"></i></a>
+                        </button>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
 </body>
 
 </html>
