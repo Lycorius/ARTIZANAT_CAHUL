@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artizanat</title>
+    <link rel="stylesheet" href="design.css">
+    <link rel="">
+</head>
+
+<body>
+    <div class="wrapper">
+       
+        <header class="container border-nav">
+            
+            <nav class="left-nav">
+                <ul>
+                    <li><a href="#">Despre noi</a></li>
+                    <li><a href="#">Servicii</a></li>
+                    <li><a href="#">Catalog</a></li>
+                </ul>
+            </nav>
+            <span class="logo">
+                <img src="imagine/LOGO.svg" alt="Logo">
+            </span>
+            
+                <ul class="right-nav">
+                    <li><a href="#">Contacte</a></li>
+                    <li class="language-selector">
+                        <select id="language">
+                            <option value="ro">ro</option>
+                            <option value="ru">ru</option>
+                        </select>
+                    </li>
+                </ul>
+            
+        </header>
+
+        <div class="hero container">
+            <div class="hero--info">
+                
+                <h2>PĂSTRĂM TRADIȚIA</h2>
+                <h1>Platouri de lemn și veselă de lut</h1>
+                <button class="btn">Vezi catalogul</button>
+            </div>
+            <div class="right-img">
+                <img src="imagine/Oala din lut.svg" alt="Oala">
+            </div>
+            <div class="left-img">
+                <img src="imagine/platou de lemn.svg" alt="platou">
+            </div>
+            
+        </div>
+
+        <div class="About">
+            <h2>
+                Despre noi
+            </h2>
+            <h1>
+                Pasionați de obiceiuri și tradiții, am decis să împărtășim cu voi cele mai reușite produse artizanale ce ne ajută să păstram tradițiile autohtone și să îi bucurăm pe cei dragi !
+            </h1>
+            <div class="img About">
+                <img src="imagine\About.svg" alt="about">
+            </div>
+        </div>
+
+  <div class="servicii">
+            <h2>
+             Servicii
+            </h2>
+            <h1>
+                Comercializarea veselei din lut tradiționale, platouri din lemn (frasin sau stejar), suporturi pentru vin (vinoteca) și seturi cadou la discreția clientului. Livrarea produselor prin poșta în țară și peste hotare.
+            </h1>
+            <div class="carousel-container">
+              <div class="carousel">
+                  <div class="carousel-slide"><img src="imagine\Păstrăm Tradiția\5.svg" alt="Image 5"></div>
+                  <div class="carousel-slide"><img src="imagine\Păstrăm Tradiția\1.svg" alt="Image 1"></div>
+                  <div class="carousel-slide"><img src="imagine\Păstrăm Tradiția\2.svg" alt="Image 2"></div>
+                  <div class="carousel-slide"><img src="imagine\Păstrăm Tradiția\3.svg" alt="Image 3"></div>
+                  <div class="carousel-slide"><img src="imagine\Păstrăm Tradiția\4.svg" alt="Image 4"></div>
+                  <div class="carousel-slide"><img src="imagine\Păstrăm Tradiția\5.svg" alt="Image START"></div>
+                  <div class="carousel-slide"><img src="imagine\Păstrăm Tradiția\1.svg" alt="Image END"></div>
+              </div>
+          </div>
+          <div class="carousel-controls">
+              <button class="carousel-btn prev">&#10094;</button>
+              <div class="carousel-indicators">
+                  <span class="indicator active" data-index="0"></span>
+                  <span class="indicator" data-index="1"></span>
+                  <span class="indicator" data-index="2"></span>
+                  <span class="indicator" data-index="3"></span>
+                  <span class="indicator" data-index="4"></span>
+              </div>
+              <button class="carousel-btn next">&#10095;</button>
+          </div>
+          <script>
+              const track = document.querySelector('.carousel');
+              const slides = document.querySelectorAll('.carousel-slide');
+              const prevBtn = document.querySelector('.prev');
+              const nextBtn = document.querySelector('.next');
+              const indicators = document.querySelectorAll('.indicator');
+              let index = 0;
+              const intervalTime = 4000;
+      
+              function updateCarousel() {
+                  track.style.transform = translateX(-${index * 100}%);
+                  indicators.forEach((indicator, i) => {
+                      indicator.classList.toggle('active', i === index);
+                  });
+              }
+      
+              function nextSlide() {
+                  index = (index + 1) % slides.length;
+                  updateCarousel();
+              }
+      
+              let autoSlide = setInterval(nextSlide, intervalTime);
+      
+              nextBtn.addEventListener('click', () => {
+                  nextSlide();
+                  resetAutoSlide();
+              });
+      
+              prevBtn.addEventListener('click', () => {
+                  index = (index - 1 + slides.length) % slides.length;
+                  updateCarousel();
+                  resetAutoSlide();
+              });
+      
+              indicators.forEach(indicator => {
+                  indicator.addEventListener('click', () => {
+                      index = parseInt(indicator.getAttribute('data-index'));
+                      updateCarousel();
+                      resetAutoSlide();
+                  });
+              });
+      
+              function resetAutoSlide() {
+                  clearInterval(autoSlide);
+                  autoSlide = setInterval(nextSlide, intervalTime);
+              }
+          </script>
+   
+    </div>
+    <div class="Contacte Container">
+      <div class="Contacte">
+        <img src="imagine\Contact_Vinoteca.svg" alt="">
+
+      </div>
+    </div>
+    <script src="animate.js"></script>
+</body>
+
+</html>
