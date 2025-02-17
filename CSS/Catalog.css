@@ -1,0 +1,204 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&family=Playfair+Display:wght@400..900&display=swap');
+
+@font-face {
+  font-family: "Sensal"; 
+  src: url("/font/Sensal\ Regular.ttf") format("truetype"); 
+  font-style: normal; 
+  font-weight: normal; 
+} 
+
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Montserrat', 'Playfair Display', sans-serif;
+  font-weight: 400;
+  background-color: #FFF5EE;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #222;
+}
+
+.wrapper {
+  background-color: #FFF5EE;
+  background-image: url('/imagine/Ellipse\ 1.svg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat; 
+}
+
+li {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+  font-weight: 600;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #FFF5EE;
+}
+
+.left-nav, .right-nav {
+  display: flex;
+  align-items: center;
+}
+
+.border-nav {
+  border-bottom: 1px solid #471F11;
+}
+
+.container {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+/* Logo */
+.logo {
+  flex: 1;
+  text-align: center;
+}
+
+.logo p {
+  font-family: 'Sensal';
+  margin: 0;
+}
+
+/* Navigation */
+nav ul {
+  display: flex;
+  gap: 100px;
+}
+
+header .left-nav, .right-nav {
+  margin-left: 80px;
+  margin-right: 80px;
+  display: flex;
+  align-items: center;
+}
+
+header .right-nav {
+  flex: 1;
+  justify-content: flex-end;
+  gap: 80px;
+}
+
+header nav ul li {
+  display: inline-block;
+}
+
+header nav ul li a {
+  font-size: 16px;
+}
+
+header .right-nav .language-selector {
+  display: flex;
+  align-items: center;
+}
+
+header .language-selector select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding: 1px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  background: #FFF5EE url('/imagine/CARET.svg') no-repeat right 3px center;
+  background-size: 16px; 
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  color: #471F11;
+  outline: none;
+  padding-right: 20px; 
+}
+
+header .language-selector {
+  position: relative;
+  display: inline-block;
+}
+
+header .right-nav img {
+  width: 20px; 
+  height: 20px; 
+}
+
+header .left-nav img {
+  width: 20px; 
+  height: 20px; 
+}
+
+.catalog {
+  display: flex;
+  justify-content: center; /* Centrarea cercurilor */
+  align-items: center;
+  padding: 20px;
+  margin-top: 125px; /* Adaugă spațiu între navbar și cercuri */
+}
+
+.libraries {
+  display: flex;
+  gap: 20px; /* Ajustează spațiul dintre iteme */
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.circle {
+  background-color: #FFF5EE;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.circle img {
+  width: 65%; 
+  height: 65%; 
+  object-fit: contain;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.circle:hover {
+  background-color: #471F11;
+}
+
+.circle:hover img {
+  filter: invert(100%) brightness(200%); /* Schimbă culoarea imaginii la alb */
+}
+
+.item p {
+  margin-top: 10px; /* Spațiu între cerc și text */
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  color: #471F11;
+  text-align: center;
+}

@@ -1,31 +1,79 @@
 <!DOCTYPE html>
-<html lang="ro">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Artizanat</title>
-    <link rel="stylesheet" href="design.css">
+    <link rel="stylesheet" href="/CSS/design.css">
+    <link rel="stylesheet" href="/CSS/Catalog.css">
 </head>
 
-<header class="container border-nav">
-    <nav class="left-nav">
-        <ul>
-            <li><a href="#">Despre noi</a></li>
-            <li><a href="#">Servicii</a></li>
-            <li><a href="#">Catalog</a></li>
-        </ul>
-    </nav>
-    <span class="logo">
-        <img src="imagine/LOGO.svg" alt="Logo">
-    </span>
-    <ul class="right-nav">
-        <li><a href="#">Contacte</a></li>
-        <li class="language-selector">
-            <select id="language">
-                <option value="ro">ro</option>
-                <option value="ru">ru</option>
-            </select>
-        </li>
-    </ul>
-</header>
+<body>
+    <div class="wrapper">
+
+        <!-- Header Section -->
+        <header class="container border-nav">
+            <!-- Left Navigation -->
+            <nav class="left-nav">
+                <ul>
+                    <li><a href="#" data-lang="header-about">Despre</a></li>
+                    <li><a href="#" data-lang="header-services">Servicii</a></li>
+                    <li><a href="#" data-lang="header-catalog">Catalog</a></li>
+                </ul>
+            </nav>
+            
+            <!-- Logo -->
+            <span class="logo">
+                <p>ARTIZANAT CAHUL</p>
+            </span>
+            
+            <!-- Right Navigation -->
+            <ul class="right-nav">
+                <li><a href="#" data-lang="header-contact">Contacte</a></li>
+                <li class="cart-item">
+                    <img src="/imagine/COȘ.svg" alt="Coș">
+                    <a href="/HTML/COS.html">Coș</a>
+                </li>
+                <li class="language-selector">
+                    <img src="/imagine/GLOB.svg" alt="GLOB">
+                    <select id="language">
+                        <option value="RO">RO</option>
+                        <option value="RU">RU</option>
+                    </select>
+                </li>
+            </ul>
+        </header>
+
+        <div class="catalog">
+            <div class="libraries">
+              <div class="item">
+                <div class="circle">
+                  <img src="/imagine/PLATOU.svg" alt="platou">
+                </div>
+                <p>Platouri din lemn</p>
+              </div>
+              <div class="item">
+                <div class="circle">
+                  <img src="/imagine/OALE.svg" alt="oale">
+                </div>
+                <p>Oale din lut</p>
+              </div>
+              <div class="item">
+                <div class="circle">
+                  <img src="/imagine/VINOTECA.svg" alt="vinoteca">
+                </div>
+                <p>Vinoteca</p>
+              </div>
+              <div class="item">
+                <div class="circle">
+                  <img src="/imagine/CADOU.svg" alt="cadou">
+                </div>
+                <p>Seturi cadou</p>
+              </div>
+            </div> 
+        </div>
+
+    </div>
+</body>
+</html>

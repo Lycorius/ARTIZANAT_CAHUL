@@ -71,7 +71,7 @@ function changeLanguage(language) {
 
 const translations = {
   ro: {
-    'header-about': 'Despre noi',
+    'header-about': 'Despre',
     'header-services': 'Servicii',
     'header-catalog': 'Catalog',
     'header-contact': 'Contacte',

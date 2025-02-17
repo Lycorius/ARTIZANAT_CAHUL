@@ -91,8 +91,8 @@ nav ul {
 }
 
 header .left-nav, .right-nav {
-  margin-left: 60px;
-  margin-right: 60px;
+  margin-left: 80px;
+  margin-right: 80px;
   display: flex;
   align-items: center;
 }
@@ -100,7 +100,7 @@ header .left-nav, .right-nav {
 header .right-nav {
   flex: 1;
   justify-content: flex-end;
-  gap: 100px;
+  gap: 80px;
 }
 
 header nav ul li {
@@ -111,38 +111,32 @@ header nav ul li a {
   font-size: 16px;
 }
 
-header .language-selector select {
-  padding: 5px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background: white;
-  cursor: pointer;
-}
-
-.language-selector {
+header .right-nav .language-selector {
   display: flex;
   align-items: center;
-  gap: 10px;
 }
 
-.language-selector img {
-  width: 20px;
-  height: 20px;
-}
-
-.language-selector select {
-  padding: 5px;
+header .language-selector select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding: 1px;
   font-size: 16px;
-  border: 1px solid #ccc;
+  border: none;
   border-radius: 5px;
-  background: white;
+  background: #FFF5EE url('/imagine/CARET.svg') no-repeat right 3px center;
+  background-size: 16px; 
   cursor: pointer;
-  transition: border-color 0.3s ease;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  color: #471F11;
+  outline: none;
+  padding-right: 20px; 
 }
 
-.language-selector select:hover {
-  border-color: #471F11;
+header .language-selector {
+  position: relative;
+  display: inline-block;
 }
 
 header .right-nav img {
