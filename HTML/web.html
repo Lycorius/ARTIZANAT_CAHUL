@@ -16,25 +16,30 @@
             <!-- Left Navigation -->
             <nav class="left-nav">
                 <ul>
-                    <li><a href="#">Despre noi</a></li>
-                    <li><a href="#">Servicii</a></li>
-                    <li><a href="#">Catalog</a></li>
+                    <li><a href="#" data-lang="header-about">Despre noi</a></li>
+                    <li><a href="#" data-lang="header-services">Servicii</a></li>
+                    <li><a href="#" data-lang="header-catalog">Catalog</a></li>
                 </ul>
             </nav>
             
             <!-- Logo -->
             <span class="logo">
-                <img src="../imagine/LOGO.svg" alt="Logo">
+                <p>ARTIZANAT Cahul</p>
             </span>
             
             <!-- Right Navigation -->
             <ul class="right-nav">
-                <li><a href="#">Contacte</a></li>
-                <li><img src="/imagine\Coș.svg" alt="Coș"><a href="#">Coș</a></li>
-                <li class="language-selector"><img src="/imagine\GLOB.png" alt="GLOB">
+                <li><a href="#" data-lang="header-contact">Contacte</a></li>
+                <li class="cart-item">
+                    <img src="/imagine/Coș.svg" alt="Coș">
+                    <a href="#">Coș</a>
+                </li>
+                <li class="language-selector">
+                    <img src="/imagine/GLOB.svg" alt="GLOB">
                     <select id="language">
                         <option value="ro">ro</option>
                         <option value="ru">ru</option>
+                        <option value="en">en</option>
                     </select>
                 </li>
             </ul>
@@ -43,9 +48,9 @@
         <!-- Hero Section -->
         <div class="hero container">
             <div class="hero--info">
-                <h2>PĂSTRĂM TRADIȚIA</h2>
-                <h1>Platouri de lemn și veselă de lut</h1>
-                <button class="btn">Vezi catalogul</button>
+                <h2 data-lang="hero-title">PĂSTRĂM TRADIȚIA</h2>
+                <h1 data-lang="hero-subtitle">Platouri de lemn și veselă de lut</h1>
+                <button class="btn" data-lang="hero-button">Vezi catalogul</button>
             </div>
             
             <!-- Right and Left Images -->
@@ -59,8 +64,8 @@
 
         <!-- About Us Section -->
         <div class="About">
-            <h2>Despre noi</h2>
-            <h1>
+            <h2 data-lang="about-title">Despre noi</h2>
+            <h1 data-lang="about-description">
                 Pasionați de obiceiuri și tradiții, am decis să împărtășim cu voi cele mai reușite produse artizanale ce ne ajută să păstram tradițiile autohtone și să îi bucurăm pe cei dragi!
             </h1>
             <div class="img About">
@@ -70,8 +75,8 @@
 
         <!-- Services Section -->
         <div class="servicii">
-            <h2>Servicii</h2>
-            <h1>
+            <h2 data-lang="services-title">Servicii</h2>
+            <h1 data-lang="services-description">
                 Comercializarea veselei din lut tradiționale, platouri din lemn (frasin sau stejar), suporturi pentru vin (vinoteca) și seturi cadou la discreția clientului. Livrarea produselor prin poșta în țară și peste hotare.
             </h1>
 
@@ -103,58 +108,57 @@
     <script src="/JS/animate.js"></script>
     <!-- Contact Section -->
     <div class="Contacte">
+        <p class="contact-title" data-lang="contact-title">Contactează-ne</p>
+        <div class="contact-content">
+            <div class="Vinoteca_Contact">
+                <img src="/imagine/Contact_Vinoteca.svg" alt="">
+            </div>
+            <div class="contact-form">
+                <p data-lang="contact-send-message">Trimite-ne un mesaj</p>
+                <form>
+                    <label for="name" data-lang="contact-name">Nume Prenume</label>
+                    <input type="text" id="name" name="name" placeholder="Ex. Vasile Lupu" required>
         
-        <p>Contactează-ne</p>
-        <div class="Vinoteca_Contact">
-            <img src="/imagine/Contact_Vinoteca.svg" alt="">
+                    <label for="phone" data-lang="contact-phone">Telefon</label>
+                    <input type="tel" id="phone" name="phone" placeholder="Ex. +373 79 123 456" required>
+        
+                    <label for="email" data-lang="contact-email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Ex. VasileLupu@mall.com" required>
+        
+                    <label for="message" data-lang="contact-message">Mesajul</label>
+                    <textarea id="message" name="message" required></textarea>
+        
+                    <button type="submit" data-lang="contact-button">Trimite mesajul</button>
+                </form>
+            </div>
         </div>
-        <div class="contact-form">
-            <p>Trimite-ne un mesaj</p>
-            <form>
-                <label for="name">Nume Prenume*</label>
-                <input type="text" id="name" name="name" placeholder="Ex. Vasile Lupu" required>
-    
-                <label for="phone">Telefon*</label>
-                <input type="tel" id="phone" name="phone" placeholder="Ex. +373 79 123 456" required>
-    
-                <label for="email">Email*</label>
-                <input type="email" id="email" name="email" placeholder="Ex. VasileLupu@mall.com" required>
-    
-                <label for="message">Mesajul*</label>
-                <textarea id="message" name="message" required></textarea>
-    
-                <button type="submit">Trimite mesajul</button>
-            </form>
-        </div>
-    </body>
-    </html>
     </div>
     <footer class="footer">
         <div class="footer-c">
-            <h2>Informații generale</h2>
+            <h2 data-lang="footer-info">Informații generale</h2>
             <nav class="footer-nav">
-                <a href="#">Acasă</a>
-                <a href="#">Catalog</a>
-                <a href="#">Despre</a>
-                <a href="#">Servicii</a>
+                <a href="#" data-lang="footer-home">Acasă</a>
+                <a href="#" data-lang="footer-catalog">Catalog</a>
+                <a href="#" data-lang="footer-about">Despre</a>
+                <a href="#" data-lang="footer-services">Servicii</a>
             </nav>
             <hr>
             <div class="contact-info">
-                <h3>ARTIZANAT CAHUL</h3>
-                <p>+(373) 60 132 630</p>
-                <p>Cahul, Centrul Comercial "Globus", str. 31 August 13B</p>
+                <h3 data-lang="footer-contact">ARTIZANAT CAHUL</h3>
+                <p data-lang="footer-phone">+(373) 60 132 630</p>
+                <p data-lang="footer-address">Cahul, Centrul Comercial "Globus", str. 31 August 13B</p>
             </div>
             <div class="social-icons">
                 <div class="Icons-btn">
-                        <button class="facebook">
-                            <a href="#"><img src="/imagine\facebook.svg" alt="Facebook"><i class="fab fa-facebook"></i></a>
-                        </button>
-                        <button class="instagram">
-                            <a href="#"><img src="/imagine\instagram.svg" alt="Instagram"><i class="fab fa-instagram"></i></a>
-                        </button>
-                        <button class="tik-tok">
-                            <a href="#"><img src="/imagine\tik-tok.svg" alt="tik-tok"><i class="fab fa-tiktok"></i></a>
-                        </button>
+                    <button class="social-link facebook">
+                        <img src="/imagine/facebook.svg" alt="Facebook">
+                    </button>
+                    <button class="social-link instagram">
+                        <img src="/imagine/instagram.svg" alt="Instagram">
+                    </button>
+                    <button class="social-link tiktok">
+                        <img src="/imagine/tik-tok.svg" alt="TikTok">
+                    </button>
                 </div>
             </div>
         </div>
