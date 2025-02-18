@@ -7,7 +7,6 @@
   font-weight: normal; 
 } 
 
-/* Global Styles */
 * {
   margin: 0;
   padding: 0;
@@ -46,7 +45,6 @@ img {
   height: auto;
 }
 
-/* Header */
 header {
   display: flex;
   justify-content: space-between;
@@ -73,7 +71,6 @@ header {
   padding: 20px;
 }
 
-/* Logo */
 .logo {
   flex: 1;
   text-align: center;
@@ -84,7 +81,6 @@ header {
   margin: 0;
 }
 
-/* Navigation */
 nav ul {
   display: flex;
   gap: 100px;
@@ -149,17 +145,23 @@ header .left-nav img {
   height: 20px; 
 }
 
+.cart-item {
+  display: flex;
+  align-items: center;
+  gap: 5px; 
+}
+
 .catalog {
   display: flex;
-  justify-content: center; /* Centrarea cercurilor */
+  justify-content: center;
   align-items: center;
   padding: 20px;
-  margin-top: 125px; /* Adaugă spațiu între navbar și cercuri */
+  margin-top: 125px;
 }
 
 .libraries {
   display: flex;
-  gap: 20px; /* Ajustează spațiul dintre iteme */
+  gap: 20px;
 }
 
 .item {
@@ -192,11 +194,11 @@ header .left-nav img {
 }
 
 .circle:hover img {
-  filter: invert(100%) brightness(200%); /* Schimbă culoarea imaginii la alb */
+  filter: invert(100%) brightness(200%);
 }
 
 .item p {
-  margin-top: 10px; /* Spațiu între cerc și text */
+  margin-top: 10px;
   font-family: 'Montserrat', sans-serif;
   font-weight: 600;
   color: #471F11;

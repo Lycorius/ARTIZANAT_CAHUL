@@ -43,8 +43,35 @@
                 </li>
             </ul>
         </header>
+
+        <!-- Cart Section -->
+        <section class="cart">
+            <h1 data-lang="cart-title">Coșul de cumpărături</h1>
+            <div class="cart-items">
+                <!-- Example of a cart item -->
+                <div class="cart-item" data-price="100">
+                    <img src="/imagine/PLATOU.svg" alt="Platou din lemn">
+                    <div class="item-details">
+                        <h2 data-lang="item-name">Platou din lemn</h2>
+                        <p class="item-price" data-lang="item-price">Preț: 100 MDL</p>
+                        <div class="item-quantity">
+                            <button class="quantity-btn decrease">-</button>
+                            <input type="number" value="1" min="1">
+                            <button class="quantity-btn increase">+</button>
+                        </div>
+                        <button class="remove-item" data-lang="remove-item">Elimină</button>
+                    </div>
+                </div>
+            </div>
+            <div class="cart-summary">
+                <h2 data-lang="summary-title">Sumar</h2>
+                <p class="total-price" data-lang="total-price">Total: 100 MDL</p>
+                <button class="checkout-btn" data-lang="checkout-button">Finalizează comanda</button>
+            </div>
+        </section>
     </div>
     <script src="/JS/animate.js"></script>
+    <script src="/JS/cart.js"></script>
 </body>
 
 </html>

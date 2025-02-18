@@ -1,73 +1,243 @@
-const track = document.querySelector('.carousel-track');
-const slides = Array.from(track.children);
-const prevBtn = document.querySelector('.prev');
-const nextBtn = document.querySelector('.next');
-const indicators = document.querySelectorAll('.indicator');
-let index = Math.floor(slides.length / 2); // Set initial index to the middle slide
-const slideWidth = slides[0].getBoundingClientRect().width;
+// Performance optimizations
+const CONFIG = {
+    SLIDE_SHOW: 5,
+    AUTO_PLAY_DELAY: 3000,
+    SWIPE_THRESHOLD: 50,
+    TRANSITION_TIME: 300,
+    MOBILE_BREAKPOINT: 768
+};
 
-// Arrange the slides next to one another
-slides.forEach((slide, i) => {
-  slide.style.left = `${slideWidth * i}px`;
-});
+// Initialize all carousel functionality
+class Carousel {
+    constructor() {
+        this.state = {
+            currentIndex: 2,
+            isTransitioning: false,
+            touchStartX: 0,
+            touchEndX: 0
+        };
 
-function updateCarousel() {
-  track.style.transform = `translateX(-${index * slideWidth}px)`;
-  indicators.forEach((indicator, i) => {
-    indicator.classList.toggle('active', i === index);
-  });
+        this.elements = {
+            track: document.querySelector('.carousel-track'),
+            slides: Array.from(document.querySelectorAll('.carousel-slide')),
+            indicators: document.querySelectorAll('.indicator')
+        };
+
+        if (!this.elements.track) return;
+        this.init();
+    }
+
+    init() {
+        this.setupInfiniteScroll();
+        this.bindEvents();
+        this.startAutoPlay();
+    }
+
+    updateTransform(position, transition = true) {
+        if (!this.elements.track) return;
+        
+        this.elements.track.style.transition = transition ? 
+            `transform ${CONFIG.TRANSITION_TIME}ms ease-in-out` : 'none';
+        this.elements.track.style.transform = `translateX(${position}px)`;
+    }
+
+    updateUI() {
+        this.elements.slides.forEach((slide, i) => 
+            slide.classList.toggle('current-slide', i === this.state.currentIndex));
+
+        this.elements.indicators.forEach((indicator, i) => 
+            indicator.classList.toggle('active', i === (this.state.currentIndex - 2) % 5));
+    }
+
+    moveToSlide(index, smooth = true) {
+        if (this.state.isTransitioning) return;
+        
+        this.state.isTransitioning = true;
+        this.state.currentIndex = index;
+        
+        this.updateTransform(-this.state.currentIndex * this.elements.slideWidth, smooth);
+        this.updateUI();
+    }
+
+    handleInfiniteScroll() {
+        if (this.state.currentIndex <= 1) {
+            this.state.currentIndex = this.elements.slides.length - 3;
+        } else if (this.state.currentIndex >= this.elements.slides.length - 2) {
+            this.state.currentIndex = 2;
+        }
+        
+        this.updateTransform(-this.state.currentIndex * this.elements.slideWidth, false);
+        this.updateUI();
+        this.state.isTransitioning = false;
+    }
+
+    setupInfiniteScroll() {
+        const cloneSlides = (slides, isStart) => {
+            return slides.map(slide => {
+                const clone = slide.cloneNode(true);
+                clone.classList.add('clone');
+                return clone;
+            });
+        };
+
+        const startClones = cloneSlides(
+            this.elements.slides.slice(0, CONFIG.SLIDE_SHOW)
+        );
+        const endClones = cloneSlides(
+            this.elements.slides.slice(-CONFIG.SLIDE_SHOW)
+        );
+
+        startClones.forEach(clone => this.elements.track.appendChild(clone));
+        endClones.reverse().forEach(clone => 
+            this.elements.track.insertBefore(clone, this.elements.track.firstChild));
+
+        this.updateTransform(-this.elements.slideWidth * CONFIG.SLIDE_SHOW, false);
+    }
+
+    toggleAutoScroll(enable) {
+        this.state.autoScrolling = enable;
+        clearTimeout(this.autoScrollTimer);
+        if (enable) this.autoScroll();
+    }
+
+    autoScroll() {
+        if (!this.state.autoScrolling) return;
+        
+        this.moveToSlide(this.state.currentIndex + 1, true);
+        this.autoScrollTimer = setTimeout(() => 
+            requestAnimationFrame(() => this.autoScroll()), CONFIG.AUTO_PLAY_DELAY);
+    }
+
+    handleTouchMove(e) {
+        if (this.state.isTransitioning) return;
+        
+        this.state.touchEndX = e.touches[0].clientX;
+        const diff = this.state.touchStartX - this.state.touchEndX;
+        
+        this.updateTransform(
+            -this.state.currentIndex * this.elements.slideWidth - diff, 
+            false
+        );
+    }
+
+    bindEvents() {
+        // Touch events with passive listeners
+        this.elements.track.addEventListener('touchstart', (e) => {
+            this.state.touchStartX = e.touches[0].clientX;
+            this.pauseAutoPlay();
+        }, { passive: true });
+
+        this.elements.track.addEventListener('touchmove', (e) => {
+            if (this.state.isTransitioning) return;
+            this.state.touchEndX = e.touches[0].clientX;
+            const diff = this.state.touchStartX - this.state.touchEndX;
+            
+            requestAnimationFrame(() => {
+                this.elements.track.style.transform = 
+                    `translateX(${-this.state.currentIndex * this.slideWidth - diff}px)`;
+            });
+        }, { passive: true });
+
+        // Button and indicator events
+        this.elements.track.addEventListener('transitionend', 
+            () => this.handleInfiniteScroll());
+        this.elements.nextBtn?.addEventListener('click', 
+            () => this.moveToSlide(this.state.currentIndex + 1));
+        this.elements.prevBtn?.addEventListener('click', 
+            () => this.moveToSlide(this.state.currentIndex - 1));
+        this.elements.indicators.forEach((indicator, i) => 
+            indicator.addEventListener('click', () => this.moveToSlide(i + 2)));
+
+        // Mouse events
+        this.elements.track.addEventListener('mouseenter', 
+            () => this.toggleAutoScroll(false));
+        this.elements.track.addEventListener('mouseleave', 
+            () => this.toggleAutoScroll(true));
+    }
 }
 
-function nextSlide() {
-  index = (index + 1) % slides.length;
-  updateCarousel();
+// Language handling
+class LanguageManager {
+    constructor(translations, defaultLang = 'ro') {
+        this.translations = translations;
+        this.init(defaultLang);
+    }
+
+    init(defaultLang) {
+        const languageSelector = document.getElementById('language');
+        if (!languageSelector) return;
+
+        languageSelector.addEventListener('change', 
+            e => this.changeLanguage(e.target.value));
+        this.changeLanguage(defaultLang);
+    }
+
+    changeLanguage(language) {
+        document.querySelectorAll('[data-lang]').forEach(element => {
+            const key = element.getAttribute('data-lang');
+            if (this.translations[language]?.[key]) {
+                element.textContent = this.translations[language][key];
+            }
+        });
+    }
 }
 
-function prevSlide() {
-  index = (index - 1 + slides.length) % slides.length;
-  updateCarousel();
+// Mobile Navigation
+class MobileNavigation {
+    constructor() {
+        this.init();
+    }
+
+    init() {
+        const hamburger = document.querySelector('.hamburger-menu');
+        const mobileNav = document.querySelector('.mobile-nav');
+        const body = document.body;
+
+        if (!hamburger || !mobileNav) return;
+
+        // Clone navigation for mobile
+        const leftNav = document.querySelector('.left-nav').cloneNode(true);
+        const rightNav = document.querySelector('.right-nav').cloneNode(true);
+        mobileNav.querySelector('nav').append(leftNav, rightNav);
+
+        // Event handlers
+        const toggleMenu = (show) => {
+            hamburger.classList.toggle('active', show);
+            mobileNav.classList.toggle('active', show);
+            body.style.overflow = show ? 'hidden' : '';
+        };
+
+        hamburger.addEventListener('click', () => 
+            toggleMenu(!mobileNav.classList.contains('active')));
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!hamburger.contains(e.target) && 
+                !mobileNav.contains(e.target) && 
+                mobileNav.classList.contains('active')) {
+                toggleMenu(false);
+            }
+        });
+
+        // Handle resize
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                if (window.innerWidth > CONFIG.MOBILE_BREAKPOINT) {
+                    toggleMenu(false);
+                }
+            }, 250);
+        });
+    }
 }
 
-nextBtn.addEventListener('click', () => {
-  nextSlide();
-  resetAutoSlide();
-});
-
-prevBtn.addEventListener('click', () => {
-  prevSlide();
-  resetAutoSlide();
-});
-
-indicators.forEach((indicator, i) => {
-  indicator.addEventListener('click', () => {
-    index = i;
-    updateCarousel();
-    resetAutoSlide();
-  });
-});
-
-const intervalTime = 4000;
-let autoSlide = setInterval(nextSlide, intervalTime);
-
-function resetAutoSlide() {
-  clearInterval(autoSlide);
-  autoSlide = setInterval(nextSlide, intervalTime);
-}
-
-const languageSelector = document.getElementById('language');
-
-languageSelector.addEventListener('change', (event) => {
-  const selectedLanguage = event.target.value;
-  changeLanguage(selectedLanguage);
-});
-
-function changeLanguage(language) {
-  const elements = document.querySelectorAll('[data-lang]');
-  elements.forEach(element => {
-    const key = element.getAttribute('data-lang');
-    element.textContent = translations[language][key];
-  });
-}
+// Initialize everything when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+    new MobileNavigation();
+    new Carousel();
+    new LanguageManager(translations);
+}, { passive: true });
 
 const translations = {
   ro: {
@@ -155,10 +325,3 @@ const translations = {
     'footer-address': 'Cahul, Globus Shopping Center, 31 August 13B'
   }
 };
-
-// Initialize language based on default or saved preference
-const defaultLanguage = 'ro'; // Set default language
-changeLanguage(defaultLanguage);
-
-// Initialize carousel
-updateCarousel();

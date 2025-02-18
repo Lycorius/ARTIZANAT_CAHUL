@@ -10,10 +10,15 @@
 
 <body>
     <div class="wrapper">
-
-        <!-- Header Section -->
         <header class="container border-nav">
-            <!-- Left Navigation -->
+            <!-- Add hamburger menu for mobile -->
+            <button class="hamburger-menu" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <!-- Left navigation -->
             <nav class="left-nav">
                 <ul>
                     <li><a href="#" data-lang="header-about">Despre</a></li>
@@ -21,13 +26,13 @@
                     <li><a href="#" data-lang="header-catalog">Catalog</a></li>
                 </ul>
             </nav>
-            
+
             <!-- Logo -->
-            <span class="logo">
+            <div class="logo">
                 <p>ARTIZANAT Cahul</p>
-            </span>
-            
-            <!-- Right Navigation -->
+            </div>
+
+            <!-- Right navigation -->
             <ul class="right-nav">
                 <li><a href="#" data-lang="header-contact">Contacte</a></li>
                 <li class="cart-item">
@@ -43,17 +48,21 @@
                     </select>
                 </li>
             </ul>
+
+            <!-- Mobile navigation panel -->
+            <div class="mobile-nav">
+                <nav>
+                    <!-- Mobile menu content will be populated by JavaScript -->
+                </nav>
+            </div>
         </header>
 
-        <!-- Hero Section -->
         <div class="hero container">
             <div class="hero--info">
                 <h2 data-lang="hero-title">PĂSTRĂM TRADIȚIA</h2>
                 <h1 data-lang="hero-subtitle">Platouri de lemn și veselă de lut</h1>
                 <a href="/HTML/catalog.html" class="btn" data-lang="hero-button">Vezi catalogul</a>
             </div>
-            
-            <!-- Right and Left Images -->
             <div class="right-img">
                 <img src="/imagine/Oala din lut.svg" alt="Oala">
             </div>
@@ -62,7 +71,6 @@
             </div>
         </div>
 
-        <!-- About Us Section -->
         <div class="About">
             <h2 data-lang="about-title">Despre noi</h2>
             <h1 data-lang="about-description">
@@ -73,31 +81,35 @@
             </div>
         </div>
 
-        <!-- Services Section -->
         <div class="servicii">
             <h2 data-lang="services-title">Servicii</h2>
             <h1 data-lang="services-description">
                 Comercializarea veselei din lut tradiționale, platouri din lemn (frasin sau stejar), suporturi pentru vin (vinoteca) și seturi cadou la discreția clientului. Livrarea produselor prin poșta în țară și peste hotare.
             </h1>
-
-            <!-- Carousel -->
             <div class="carousel">
                 <div class="carousel-track">
-                    <div class="carousel-slide"><img src="/imagine/Păstrăm Tradiția/5.svg" alt="Image 5"></div>
+                    <!-- Clone last slides for seamless effect -->
+                    <div class="carousel-slide clone"><img src="/imagine/Păstrăm Tradiția/4.svg" alt="Image 4"></div>
+                    <div class="carousel-slide clone"><img src="/imagine/Păstrăm Tradiția/5.svg" alt="Image 5"></div>
+                    
+                    <!-- Original slides -->
                     <div class="carousel-slide"><img src="/imagine/Păstrăm Tradiția/1.svg" alt="Image 1"></div>
                     <div class="carousel-slide"><img src="/imagine/Păstrăm Tradiția/2.svg" alt="Image 2"></div>
-                    <div class="carousel-slide"><img src="/imagine/Păstrăm Tradiția/3.svg" alt="Image 3"></div>
+                    <div class="carousel-slide current-slide"><img src="/imagine/Păstrăm Tradiția/3.svg" alt="Image 3"></div>
                     <div class="carousel-slide"><img src="/imagine/Păstrăm Tradiția/4.svg" alt="Image 4"></div>
+                    <div class="carousel-slide"><img src="/imagine/Păstrăm Tradiția/5.svg" alt="Image 5"></div>
+                    
+                    <!-- Clone first slides for seamless effect -->
+                    <div class="carousel-slide clone"><img src="/imagine/Păstrăm Tradiția/1.svg" alt="Image 1"></div>
+                    <div class="carousel-slide clone"><img src="/imagine/Păstrăm Tradiția/2.svg" alt="Image 2"></div>
                 </div>
             </div>
-
-            <!-- Carousel Controls -->
             <div class="carousel-controls">
                 <button class="carousel-btn prev">&#10094;</button>
                 <div class="carousel-indicators">
-                    <span class="indicator active" data-index="0"></span>
+                    <span class="indicator" data-index="0"></span>
                     <span class="indicator" data-index="1"></span>
-                    <span class="indicator" data-index="2"></span>
+                    <span class="indicator active" data-index="2"></span>
                     <span class="indicator" data-index="3"></span>
                     <span class="indicator" data-index="4"></span>
                 </div>
@@ -105,7 +117,6 @@
             </div>
         </div>
 
-        <!-- Contact Section -->
         <div class="Contacte">
             <p class="contact-title" data-lang="contact-title">Contactează-ne</p>
             <div class="contact-content">
@@ -117,23 +128,18 @@
                     <form>
                         <label for="name" data-lang="contact-name">Nume Prenume</label>
                         <input type="text" id="name" name="name" placeholder="Ex. Vasile Lupu" required>
-            
                         <label for="phone" data-lang="contact-phone">Telefon</label>
                         <input type="tel" id="phone" name="phone" placeholder="Ex. +373 79 123 456" required>
-            
                         <label for="email" data-lang="contact-email">Email</label>
                         <input type="email" id="email" name="email" placeholder="Ex. VasileLupu@mall.com" required>
-            
                         <label for="message" data-lang="contact-message">Mesajul</label>
                         <textarea id="message" name="message" required></textarea>
-            
                         <button type="submit" data-lang="contact-button">Trimite mesajul</button>
                     </form>
                 </div>
             </div>
         </div>
 
-        <!-- Footer Section -->
         <footer class="footer">
             <div class="footer-c">
                 <h2 data-lang="footer-info">Informații generale</h2>
@@ -165,8 +171,7 @@
             </div>
         </footer>
     </div>
-
-    <!-- JavaScript -->
+    <script src="/JS/carousel.js"></script>
     <script src="/JS/animate.js"></script>
 </body>
 
