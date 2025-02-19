@@ -10,38 +10,61 @@
 
 <body>
     <div class="wrapper">
-        <!-- Header Section -->
         <header class="container border-nav">
-            <!-- Left Navigation -->
-            <nav class="left-nav">
-                <ul>
-                    <li><a href="#" data-lang="header-about">Despre noi</a></li>
+            <button class="hamburger-menu" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav class="desktop-nav">
+                <ul class="left-nav">
+                    <li><a href="#" data-lang="header-about">Despre</a></li>
                     <li><a href="#" data-lang="header-services">Servicii</a></li>
                     <li><a href="#" data-lang="header-catalog">Catalog</a></li>
                 </ul>
+                <ul class="right-nav">
+                    <li><a href="#" data-lang="header-contact">Contacte</a></li>
+                    <li class="cart-item">
+                        <img src="/imagine/Coș.svg" alt="Coș">
+                        <a href="/HTML/COS.html">Coș</a>
+                    </li>
+                    <li class="language-selector">
+                        <img src="/imagine/GLOB.svg" alt="GLOB">
+                        <select id="language">
+                            <option value="ro">ro</option>
+                            <option value="ru">ru</option>
+                            <option value="en">en</option>
+                        </select>
+                    </li>
+                </ul>
             </nav>
-            
-            <!-- Logo -->
-            <span class="logo">
-                <p>ARTIZANAT Cahul</p>
-            </span>
-            
-            <!-- Right Navigation -->
-            <ul class="right-nav">
-                <li><a href="#" data-lang="header-contact">Contacte</a></li>
-                <li class="cart-item">
-                    <img src="/imagine/Coș.svg" alt="Coș">
-                    <a href="/HTML/COS.html">Coș</a>
-                </li>
-                <li class="language-selector">
-                    <img src="/imagine/GLOB.svg" alt="GLOB">
-                    <select id="language">
-                        <option value="ro">ro</option>
-                        <option value="ru">ru</option>
-                        <option value="en">en</option>
-                    </select>
-                </li>
-            </ul>
+
+            <div class="logo">
+                <p>ARTIZANAT CAHUl</p>
+            </div>
+
+            <div class="mobile-nav">
+                <nav>
+                    <ul>
+                        <li><a href="#" data-lang="header-about">Despre</a></li>
+                        <li><a href="#" data-lang="header-services">Servicii</a></li>
+                        <li><a href="#" data-lang="header-catalog">Catalog</a></li>
+                        <li><a href="#" data-lang="header-contact">Contacte</a></li>
+                        <li class="cart-item">
+                            <img src="/imagine/Coș.svg" alt="Coș">
+                            <a href="/HTML/COS.html">Coș</a>
+                        </li>
+                        <li class="language-selector">
+                            <img src="/imagine/GLOB.svg" alt="GLOB">
+                            <select id="language-mobile">
+                                <option value="ro">ro</option>
+                                <option value="ru">ru</option>
+                                <option value="en">en</option>
+                            </select>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
         </header>
 
         <!-- Cart Section -->

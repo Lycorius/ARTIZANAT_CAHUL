@@ -1,9 +1,9 @@
-// Performance optimizations
+// Constants and Configurations
 const CONFIG = {
     SLIDE_SHOW: 5,
     AUTO_PLAY_DELAY: 3000,
-    SWIPE_THRESHOLD: 50,
-    TRANSITION_TIME: 300,
+    SWIPE_THRESHOLD: 100,
+    TRANSITION_TIME: 500,
     MOBILE_BREAKPOINT: 768
 };
 
@@ -13,24 +13,34 @@ class Carousel {
         this.state = {
             currentIndex: 2,
             isTransitioning: false,
+            autoScrolling: true,
             touchStartX: 0,
             touchEndX: 0
         };
 
         this.elements = {
             track: document.querySelector('.carousel-track'),
-            slides: Array.from(document.querySelectorAll('.carousel-slide')),
-            indicators: document.querySelectorAll('.indicator')
+            nextBtn: document.querySelector('.carousel-btn.next'),
+            prevBtn: document.querySelector('.carousel-btn.prev'),
+            indicators: document.querySelectorAll('.indicator'),
+            slides: null,
+            slideWidth: null
         };
 
-        if (!this.elements.track) return;
+        this.autoScrollTimer = null;
         this.init();
     }
 
     init() {
-        this.setupInfiniteScroll();
+        if (!this.elements.track) return;
+        
+        this.elements.slides = Array.from(this.elements.track.children);
+        this.elements.slideWidth = this.elements.slides[0].getBoundingClientRect().width;
+        
+        this.setupInfiniteSlides();
         this.bindEvents();
-        this.startAutoPlay();
+        this.updateUI();
+        this.toggleAutoScroll(true);
     }
 
     updateTransform(position, transition = true) {
@@ -71,7 +81,7 @@ class Carousel {
         this.state.isTransitioning = false;
     }
 
-    setupInfiniteScroll() {
+    setupInfiniteSlides() {
         const cloneSlides = (slides, isStart) => {
             return slides.map(slide => {
                 const clone = slide.cloneNode(true);
@@ -121,22 +131,24 @@ class Carousel {
     }
 
     bindEvents() {
-        // Touch events with passive listeners
-        this.elements.track.addEventListener('touchstart', (e) => {
+        // Touch events
+        this.elements.track.addEventListener('touchstart', e => {
             this.state.touchStartX = e.touches[0].clientX;
-            this.pauseAutoPlay();
+            this.toggleAutoScroll(false);
         }, { passive: true });
 
-        this.elements.track.addEventListener('touchmove', (e) => {
-            if (this.state.isTransitioning) return;
-            this.state.touchEndX = e.touches[0].clientX;
+        this.elements.track.addEventListener('touchmove', 
+            e => this.handleTouchMove(e), { passive: true });
+
+        this.elements.track.addEventListener('touchend', () => {
             const diff = this.state.touchStartX - this.state.touchEndX;
-            
-            requestAnimationFrame(() => {
-                this.elements.track.style.transform = 
-                    `translateX(${-this.state.currentIndex * this.slideWidth - diff}px)`;
-            });
-        }, { passive: true });
+            if (Math.abs(diff) > CONFIG.SWIPE_THRESHOLD) {
+                this.moveToSlide(this.state.currentIndex + (diff > 0 ? 1 : -1));
+            } else {
+                this.moveToSlide(this.state.currentIndex);
+            }
+            this.toggleAutoScroll(true);
+        });
 
         // Button and indicator events
         this.elements.track.addEventListener('transitionend', 
@@ -183,62 +195,53 @@ class LanguageManager {
 }
 
 // Mobile Navigation
-class MobileNavigation {
+class MobileNav {
     constructor() {
+        this.elements = {
+            hamburger: document.querySelector('.hamburger-menu'),
+            mobileNav: document.querySelector('.mobile-nav'),
+            body: document.body
+        };
         this.init();
     }
 
     init() {
-        const hamburger = document.querySelector('.hamburger-menu');
-        const mobileNav = document.querySelector('.mobile-nav');
-        const body = document.body;
+        if (!this.elements.hamburger || !this.elements.mobileNav) return;
+        this.bindEvents();
+    }
 
-        if (!hamburger || !mobileNav) return;
+    toggleMenu(show) {
+        this.elements.hamburger.classList.toggle('active', show);
+        this.elements.mobileNav.classList.toggle('active', show);
+        this.elements.body.style.overflow = show ? 'hidden' : '';
+    }
 
-        // Clone navigation for mobile
-        const leftNav = document.querySelector('.left-nav').cloneNode(true);
-        const rightNav = document.querySelector('.right-nav').cloneNode(true);
-        mobileNav.querySelector('nav').append(leftNav, rightNav);
-
-        // Event handlers
-        const toggleMenu = (show) => {
-            hamburger.classList.toggle('active', show);
-            mobileNav.classList.toggle('active', show);
-            body.style.overflow = show ? 'hidden' : '';
-        };
-
-        hamburger.addEventListener('click', () => 
-            toggleMenu(!mobileNav.classList.contains('active')));
+    bindEvents() {
+        // Toggle menu on hamburger click
+        this.elements.hamburger.addEventListener('click', () => {
+            const isActive = this.elements.mobileNav.classList.contains('active');
+            this.toggleMenu(!isActive);
+        });
 
         // Close menu when clicking outside
         document.addEventListener('click', (e) => {
-            if (!hamburger.contains(e.target) && 
-                !mobileNav.contains(e.target) && 
-                mobileNav.classList.contains('active')) {
-                toggleMenu(false);
+            if (!this.elements.hamburger.contains(e.target) && 
+                !this.elements.mobileNav.contains(e.target) && 
+                this.elements.mobileNav.classList.contains('active')) {
+                this.toggleMenu(false);
             }
         });
 
-        // Handle resize
-        let resizeTimer;
+        // Close menu on resize
         window.addEventListener('resize', () => {
-            clearTimeout(resizeTimer);
-            resizeTimer = setTimeout(() => {
-                if (window.innerWidth > CONFIG.MOBILE_BREAKPOINT) {
-                    toggleMenu(false);
-                }
-            }, 250);
+            if (window.innerWidth > 768) {
+                this.toggleMenu(false);
+            }
         });
     }
 }
 
-// Initialize everything when DOM is ready
-document.addEventListener('DOMContentLoaded', () => {
-    new MobileNavigation();
-    new Carousel();
-    new LanguageManager(translations);
-}, { passive: true });
-
+// Translation strings
 const translations = {
   ro: {
     'header-about': 'Despre',
@@ -325,3 +328,10 @@ const translations = {
     'footer-address': 'Cahul, Globus Shopping Center, 31 August 13B'
   }
 };
+
+// Initialize everything when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+    new Carousel();
+    new LanguageManager(translations);
+    new MobileNav();
+});

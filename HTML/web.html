@@ -11,48 +11,63 @@
 <body>
     <div class="wrapper">
         <header class="container border-nav">
-            <!-- Add hamburger menu for mobile -->
+            <!-- Hamburger menu (mobile only) -->
             <button class="hamburger-menu" aria-label="Menu">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
 
-            <!-- Left navigation -->
-            <nav class="left-nav">
-                <ul>
+            <!-- Desktop Navigation -->
+            <nav class="desktop-nav">
+                <ul class="left-nav">
                     <li><a href="#" data-lang="header-about">Despre</a></li>
                     <li><a href="#" data-lang="header-services">Servicii</a></li>
                     <li><a href="#" data-lang="header-catalog">Catalog</a></li>
                 </ul>
+                <ul class="right-nav">
+                    <li><a href="#" data-lang="header-contact">Contacte</a></li>
+                    <li class="cart-item">
+                        <img src="/imagine/Coș.svg" alt="Coș">
+                        <a href="/HTML/COS.html">Coș</a>
+                    </li>
+                    <li class="language-selector">
+                        <img src="/imagine/GLOB.svg" alt="GLOB">
+                        <select id="language">
+                            <option value="ro">ro</option>
+                            <option value="ru">ru</option>
+                            <option value="en">en</option>
+                        </select>
+                    </li>
+                </ul>
             </nav>
 
-            <!-- Logo -->
+            <!-- Logo (always centered) -->
             <div class="logo">
-                <p>ARTIZANAT Cahul</p>
+                <p>ARTIZANAT CAHUl</p>
             </div>
 
-            <!-- Right navigation -->
-            <ul class="right-nav">
-                <li><a href="#" data-lang="header-contact">Contacte</a></li>
-                <li class="cart-item">
-                    <img src="/imagine/Coș.svg" alt="Coș">
-                    <a href="/HTML/COS.html">Coș</a>
-                </li>
-                <li class="language-selector">
-                    <img src="/imagine/GLOB.svg" alt="GLOB">
-                    <select id="language">
-                        <option value="ro">ro</option>
-                        <option value="ru">ru</option>
-                        <option value="en">en</option>
-                    </select>
-                </li>
-            </ul>
-
-            <!-- Mobile navigation panel -->
+            <!-- Mobile Navigation Panel -->
             <div class="mobile-nav">
                 <nav>
-                    <!-- Mobile menu content will be populated by JavaScript -->
+                    <ul>
+                        <li><a href="#" data-lang="header-about">Despre</a></li>
+                        <li><a href="#" data-lang="header-services">Servicii</a></li>
+                        <li><a href="#" data-lang="header-catalog">Catalog</a></li>
+                        <li><a href="#" data-lang="header-contact">Contacte</a></li>
+                        <li class="cart-item">
+                            <img src="/imagine/Coș.svg" alt="Coș">
+                            <a href="/HTML/COS.html">Coș</a>
+                        </li>
+                        <li class="language-selector">
+                            <img src="/imagine/GLOB.svg" alt="GLOB">
+                            <select id="language-mobile">
+                                <option value="ro">ro</option>
+                                <option value="ru">ru</option>
+                                <option value="en">en</option>
+                            </select>
+                        </li>
+                    </ul>
                 </nav>
             </div>
         </header>
