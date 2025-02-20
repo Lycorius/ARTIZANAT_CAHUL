@@ -10,66 +10,70 @@
 
 <body>
     <div class="wrapper">
-            <header class="container border-nav">
-                <button class="hamburger-menu" aria-label="Menu">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-                <nav class="desktop-nav">
-                    <ul class="left-nav">
-                        <li><a href="#about" data-lang="header-about">Despre</a></li>
-                        <li><a href="#services" data-lang="header-services">Servicii</a></li>
-                        <li><a href="/HTML/catalog.html" data-lang="header-catalog">Catalog</a></li>
-                    </ul>
-                    <ul class="right-nav">
-                        <li><a href="#contact" data-lang="header-contact">Contacte</a></li>
-                        <li class="cart-link">
-                            <a href="/HTML/COS.html">
-                                <img src="/imagine/Coș.svg" alt="Coș">
-                                <span class="cart-count">0</span>
-                            </a>
-                        </li>
-                        <li class="language-selector">
-                            <img src="/imagine/GLOB.svg" alt="GLOB">
-                            <select id="language">
-                                <option value="ro">RO</option>
-                                <option value="ru">RU</option>
-                                <option value="en">EN</option>
-                            </select>
-                        </li>
-                    </ul>
-                </nav>
-                <div class="logo">
-                    <a href="/">
-                        <p>ARTIZANAT CAHUL</p>
+            <!-- Standard header template to use in all files -->
+<header class="container border-nav">
+    <button class="hamburger-menu" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+    
+    <div class="logo">
+        <a href="/HTML/web.html">
+            <p>ARTIZANAT CAHUL</p>
+        </a>
+    </div>
+
+    <nav class="desktop-nav">
+        <ul class="left-nav">
+            <li><a href="/HTML/web.html#about" data-lang="header-about">Despre</a></li>
+            <li><a href="/HTML/web.html#services" data-lang="header-services">Servicii</a></li>
+            <li><a href="/HTML/catalog.html" data-lang="header-catalog">Catalog</a></li>
+        </ul>
+        <ul class="right-nav">
+            <li><a href="/HTML/web.html#contact" data-lang="header-contact">Contacte</a></li>
+            <li class="cart-link">
+                <a href="/HTML/COS.html">
+                    <img src="/imagine/Coș.svg" alt="Coș">
+                    <span class="cart-count">0</span>
+                </a>
+            </li>
+            <li class="language-selector">
+                <img src="/imagine/GLOB.svg" alt="GLOB">
+                <select id="language">
+                    <option value="ro">RO</option>
+                    <option value="ru">RU</option>
+                    <option value="en">EN</option>
+                </select>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="mobile-nav">
+        <nav>
+            <ul>
+                <li><a href="/HTML/web.html#about" data-lang="header-about">Despre</a></li>
+                <li><a href="/HTML/web.html#services" data-lang="header-services">Servicii</a></li>
+                <li><a href="/HTML/catalog.html" data-lang="header-catalog">Catalog</a></li>
+                <li><a href="/HTML/web.html#contact" data-lang="header-contact">Contacte</a></li>
+                <li class="cart-link">
+                    <a href="/HTML/COS.html">
+                        <img src="/imagine/Coș.svg" alt="Coș">
+                        <span class="cart-count">0</span>
                     </a>
-                </div>
-                <div class="mobile-nav">
-                    <nav>
-                        <ul>
-                            <li><a href="#about" data-lang="header-about">Despre</a></li>
-                            <li><a href="#services" data-lang="header-services">Servicii</a></li>
-                            <li><a href="/HTML/catalog.html" data-lang="header-catalog">Catalog</a></li>
-                            <li><a href="#contact" data-lang="header-contact">Contacte</a></li>
-                            <li class="cart-link">
-                                <a href="/HTML/COS.html">
-                                    <img src="/imagine/Coș.svg" alt="Coș">
-                                    <span class="cart-count">0</span>
-                                </a>
-                            </li>
-                            <li class="language-selector">
-                                <img src="/imagine/GLOB.svg" alt="GLOB">
-                                <select id="language-mobile">
-                                    <option value="ro">RO</option>
-                                    <option value="ru">RU</option>
-                                    <option value="en">EN</option>
-                                </select>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-            </header>
+                </li>
+                <li class="language-selector">
+                    <img src="/imagine/GLOB.svg" alt="GLOB">
+                    <select id="language-mobile">
+                        <option value="ro">RO</option>
+                        <option value="ru">RU</option>
+                        <option value="en">EN</option>
+                    </select>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
 
         <div class="catalog">
             <div class="libraries">
