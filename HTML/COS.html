@@ -18,22 +18,24 @@
             </button>
             <nav class="desktop-nav">
                 <ul class="left-nav">
-                    <li><a href="#" data-lang="header-about">Despre</a></li>
-                    <li><a href="#" data-lang="header-services">Servicii</a></li>
-                    <li><a href="#" data-lang="header-catalog">Catalog</a></li>
+                    <li><a href="/HTML/web.html" data-lang="header-about">Despre</a></li>
+                    <li><a href="#services" data-lang="header-services">Servicii</a></li>
+                    <li><a href="/HTML/catalog.html" data-lang="header-catalog">Catalog</a></li>
                 </ul>
                 <ul class="right-nav">
-                    <li><a href="#" data-lang="header-contact">Contacte</a></li>
-                    <li class="cart-item">
-                        <img src="/imagine/Coș.svg" alt="Coș">
-                        <a href="/HTML/COS.html">Coș</a>
+                    <li><a href="#contact" data-lang="header-contact">Contacte</a></li>
+                    <li class="cart-link">
+                        <a href="/HTML/COS.html">
+                            <img src="/imagine/Coș.svg" alt="Coș">
+                            <span class="cart-count">0</span>
+                        </a>
                     </li>
                     <li class="language-selector">
                         <img src="/imagine/GLOB.svg" alt="GLOB">
                         <select id="language">
-                            <option value="ro">ro</option>
-                            <option value="ru">ru</option>
-                            <option value="en">en</option>
+                            <option value="ro">RO</option>
+                            <option value="ru">RU</option>
+                            <option value="en">EN</option>
                         </select>
                     </li>
                 </ul>
@@ -48,53 +50,83 @@
                     <ul>
                         <li><a href="#" data-lang="header-about">Despre</a></li>
                         <li><a href="#" data-lang="header-services">Servicii</a></li>
-                        <li><a href="#" data-lang="header-catalog">Catalog</a></li>
+                        <li><a href="/HTML/catalog.html" data-lang="header-catalog">Catalog</a></li>
                         <li><a href="#" data-lang="header-contact">Contacte</a></li>
-                        <li class="cart-item">
-                            <img src="/imagine/Coș.svg" alt="Coș">
-                            <a href="/HTML/COS.html">Coș</a>
+                        <li class="cart-link">
+                            <a href="/HTML/COS.html">
+                                <img src="/imagine/Coș.svg" alt="Coș">
+                                <span class="cart-count">0</span>
+                            </a>
                         </li>
                         <li class="language-selector">
                             <img src="/imagine/GLOB.svg" alt="GLOB">
                             <select id="language-mobile">
-                                <option value="ro">ro</option>
-                                <option value="ru">ru</option>
-                                <option value="en">en</option>
+                                <option value="ro">RO</option>
+                                <option value="ru">RU</option>
+                                <option value="en">EN</option>
                             </select>
                         </li>
                     </ul>
                 </nav>
             </div>
         </header>
-
-        <!-- Cart Section -->
-        <section class="cart">
-            <h1 data-lang="cart-title">Coșul de cumpărături</h1>
-            <div class="cart-items">
-                <!-- Example of a cart item -->
-                <div class="cart-item" data-price="100">
-                    <img src="/imagine/PLATOU.svg" alt="Platou din lemn">
-                    <div class="item-details">
-                        <h2 data-lang="item-name">Platou din lemn</h2>
-                        <p class="item-price" data-lang="item-price">Preț: 100 MDL</p>
-                        <div class="item-quantity">
-                            <button class="quantity-btn decrease">-</button>
-                            <input type="number" value="1" min="1">
-                            <button class="quantity-btn increase">+</button>
-                        </div>
-                        <button class="remove-item" data-lang="remove-item">Elimină</button>
+        
+        <div class="cart-container">
+            <h1 data-lang="cart-title">Coșul meu</h1>
+            <div class="cart-layout">
+                <div class="cart-items">
+                    <p class="empty-cart" data-lang="cart-empty">Coșul dvs. este gol</p>
+                </div>
+                <div class="cart-actions">
+                    <div class="cart-summary">
+                        <h2 class="cart-total"><span data-lang="cart-total">Total:</span> 0.00 MDL</h2>
+                        <button class="checkout-btn" data-lang="cart-checkout">Finalizează comanda</button>
+                        <a href="/HTML/catalog.html" class="return-btn" data-lang="cart-return">Înapoi la catalog</a>
                     </div>
                 </div>
             </div>
-            <div class="cart-summary">
-                <h2 data-lang="summary-title">Sumar</h2>
-                <p class="total-price" data-lang="total-price">Total: 100 MDL</p>
-                <button class="checkout-btn" data-lang="checkout-button">Finalizează comanda</button>
-            </div>
-        </section>
+        </div>
+    <div class="order-modal" id="orderModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 data-lang="modal-title">Finalizare comandă</h2>
+            <form id="orderForm" action="https://formsubmit.co/your-email@example.com" method="POST">
+                <input type="hidden" name="_subject" value="Nouă comandă - Artizanat">
+                <input type="hidden" name="_template" value="table">
+                <input type="hidden" name="order_details" id="orderDetails">
+                
+                <div class="form-group">
+                    <label for="name" data-lang="modal-name">Nume Prenume *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone" data-lang="modal-phone">Telefon *</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email" data-lang="modal-email">Email *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="address" data-lang="modal-address">Adresa de livrare *</label>
+                    <textarea id="address" name="address" required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="comments" data-lang="modal-comments">Comentarii</label>
+                    <textarea id="comments" name="comments"></textarea>
+                </div>
+                
+                <button type="submit" class="submit-order" data-lang="modal-confirm">Confirmă comanda</button>
+            </form>
+        </div>
     </div>
-    <script src="/JS/animate.js"></script>
     <script src="/JS/cart.js"></script>
+    <script src="/JS/carousel.js" defer></script>
+    <script src="/JS/animate.js" defer></script>
 </body>
 
 </html>

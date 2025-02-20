@@ -6,8 +6,8 @@
     "axe/forms": [
       "default",
       {
-        "select-name": "off",
-        "label": "off"
+        "label": "off",
+        "select-name": "off"
       }
     ],
     "compat-api/css": [
@@ -16,6 +16,12 @@
         "ignore": [
           "user-select"
         ]
+      }
+    ],
+    "axe/parsing": [
+      "default",
+      {
+        "duplicate-id-active": "off"
       }
     ]
   }

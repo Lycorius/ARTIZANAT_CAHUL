@@ -1,0 +1,5 @@
+<script>start("c:\\Users\\Radu\\Desktop\\artizanat\\imagine\\catalog\\catalog\\");</script>
+<script>onHasParentDirectory();</script>
+<script>addRow("oale","oale",1,0,"0 B",1740024886,"2/20/25, 6:14:46 AM");</script>
+<script>addRow("platouri","platouri",1,0,"0 B",1740024886,"2/20/25, 6:14:46 AM");</script>
+<script>addRow("Vinoteca","Vinoteca",1,0,"0 B",1740024887,"2/20/25, 6:14:47 AM");</script>

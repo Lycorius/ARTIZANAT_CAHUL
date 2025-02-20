@@ -1,4 +1,3 @@
-// Constants and Configurations
 const CONFIG = {
     SLIDE_SHOW: 5,
     AUTO_PLAY_DELAY: 3000,
@@ -7,7 +6,6 @@ const CONFIG = {
     MOBILE_BREAKPOINT: 768
 };
 
-// Initialize all carousel functionality
 class Carousel {
     constructor() {
         this.state = {
@@ -131,7 +129,6 @@ class Carousel {
     }
 
     bindEvents() {
-        // Touch events
         this.elements.track.addEventListener('touchstart', e => {
             this.state.touchStartX = e.touches[0].clientX;
             this.toggleAutoScroll(false);
@@ -150,7 +147,6 @@ class Carousel {
             this.toggleAutoScroll(true);
         });
 
-        // Button and indicator events
         this.elements.track.addEventListener('transitionend', 
             () => this.handleInfiniteScroll());
         this.elements.nextBtn?.addEventListener('click', 
@@ -160,7 +156,6 @@ class Carousel {
         this.elements.indicators.forEach((indicator, i) => 
             indicator.addEventListener('click', () => this.moveToSlide(i + 2)));
 
-        // Mouse events
         this.elements.track.addEventListener('mouseenter', 
             () => this.toggleAutoScroll(false));
         this.elements.track.addEventListener('mouseleave', 
@@ -168,80 +163,90 @@ class Carousel {
     }
 }
 
-// Language handling
 class LanguageManager {
-    constructor(translations, defaultLang = 'ro') {
+    constructor(translations) {
         this.translations = translations;
-        this.init(defaultLang);
-    }
-
-    init(defaultLang) {
-        const languageSelector = document.getElementById('language');
-        if (!languageSelector) return;
-
-        languageSelector.addEventListener('change', 
-            e => this.changeLanguage(e.target.value));
-        this.changeLanguage(defaultLang);
-    }
-
-    changeLanguage(language) {
-        document.querySelectorAll('[data-lang]').forEach(element => {
-            const key = element.getAttribute('data-lang');
-            if (this.translations[language]?.[key]) {
-                element.textContent = this.translations[language][key];
-            }
-        });
-    }
-}
-
-// Mobile Navigation
-class MobileNav {
-    constructor() {
-        this.elements = {
-            hamburger: document.querySelector('.hamburger-menu'),
-            mobileNav: document.querySelector('.mobile-nav'),
-            body: document.body
-        };
+        this.currentLang = localStorage.getItem('language') || 'ro';
         this.init();
     }
 
     init() {
-        if (!this.elements.hamburger || !this.elements.mobileNav) return;
-        this.bindEvents();
+        const desktopSelector = document.getElementById('language');
+        const mobileSelector = document.getElementById('language-mobile');
+        
+        if (desktopSelector) {
+            desktopSelector.value = this.currentLang;
+            desktopSelector.addEventListener('change', (e) => this.changeLanguage(e.target.value));
+        }
+        
+        if (mobileSelector) {
+            mobileSelector.value = this.currentLang;
+            mobileSelector.addEventListener('change', (e) => this.changeLanguage(e.target.value));
+        }
+
+        this.updateContent();
     }
 
-    toggleMenu(show) {
-        this.elements.hamburger.classList.toggle('active', show);
-        this.elements.mobileNav.classList.toggle('active', show);
-        this.elements.body.style.overflow = show ? 'hidden' : '';
+    changeLanguage(lang) {
+        this.currentLang = lang;
+        localStorage.setItem('language', lang);
+        
+        const desktopSelector = document.getElementById('language');
+        const mobileSelector = document.getElementById('language-mobile');
+        
+        if (desktopSelector) desktopSelector.value = lang;
+        if (mobileSelector) mobileSelector.value = lang;
+        
+        this.updateContent();
     }
 
-    bindEvents() {
-        // Toggle menu on hamburger click
-        this.elements.hamburger.addEventListener('click', () => {
-            const isActive = this.elements.mobileNav.classList.contains('active');
-            this.toggleMenu(!isActive);
-        });
-
-        // Close menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!this.elements.hamburger.contains(e.target) && 
-                !this.elements.mobileNav.contains(e.target) && 
-                this.elements.mobileNav.classList.contains('active')) {
-                this.toggleMenu(false);
-            }
-        });
-
-        // Close menu on resize
-        window.addEventListener('resize', () => {
-            if (window.innerWidth > 768) {
-                this.toggleMenu(false);
+    updateContent() {
+        document.querySelectorAll('[data-lang]').forEach(element => {
+            const key = element.getAttribute('data-lang');
+            if (this.translations[this.currentLang][key]) {
+                element.textContent = this.translations[this.currentLang][key];
             }
         });
     }
 }
 
-// Translation strings
+class MobileNav {
+    constructor() {
+        this.hamburger = document.querySelector('.hamburger-menu');
+        this.mobileNav = document.querySelector('.mobile-nav');
+        this.body = document.body;
+        this.init();
+    }
+
+    init() {
+        if (!this.hamburger || !this.mobileNav) return;
+        
+        this.hamburger.addEventListener('click', () => {
+            this.hamburger.classList.toggle('active');
+            this.mobileNav.classList.toggle('active');
+            this.body.classList.toggle('no-scroll');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!this.mobileNav.contains(e.target) && 
+                !this.hamburger.contains(e.target) && 
+                this.mobileNav.classList.contains('active')) {
+                this.hamburger.classList.remove('active');
+                this.mobileNav.classList.remove('active');
+                this.body.classList.remove('no-scroll');
+            }
+        });
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                this.hamburger.classList.remove('active');
+                this.mobileNav.classList.remove('active');
+                this.body.classList.remove('no-scroll');
+            }
+        });
+    }
+}
+
 const translations = {
   ro: {
     'header-about': 'Despre',
@@ -269,7 +274,30 @@ const translations = {
     'footer-services': 'Servicii',
     'footer-contact': 'ARTIZANAT CAHUL',
     'footer-phone': '+(373) 60 132 630',
-    'footer-address': 'Cahul, Centrul Comercial "Globus", str. 31 August 13B'
+    'footer-address': 'Cahul, Centrul Comercial "Globus", str. 31 August 13B',
+    'cart-title': 'Coșul meu',
+    'cart-total': 'Total:',
+    'cart-empty': 'Coșul dvs. este gol',
+    'cart-checkout': 'Finalizează comanda',
+    'cart-return': 'Înapoi la catalog',
+    'modal-title': 'Finalizare comandă',
+    'modal-name': 'Nume Prenume *',
+    'modal-phone': 'Telefon *',
+    'modal-email': 'Email *',
+    'modal-address': 'Adresa de livrare *',
+    'modal-comments': 'Comentarii',
+    'modal-confirm': 'Confirmă comanda',
+    'catalog-platouri': 'Platouri din lemn',
+    'catalog-oale': 'Oale din lut',
+    'catalog-vinoteca': 'Vinotecă',
+    'catalog-title': 'Catalog',
+    'product-add': 'Adaugă în coș',
+    'notification-added': 'Adăugat în coș',
+    'notification-view-cart': 'Vezi coșul',
+    'product-details': 'Detalii:',
+    'product-size': 'Mărime:',
+    'product-description': 'Descriere:',
+    'product-currency': 'MDL'
   },
   ru: {
     'header-about': 'О нас',
@@ -297,7 +325,30 @@ const translations = {
     'footer-services': 'Услуги',
     'footer-contact': 'АРТИЗАНАТ КАХУЛ',
     'footer-phone': '+(373) 60 132 630',
-    'footer-address': 'Кахул, Торговый центр "Глобус", ул. 31 Августа 13Б'
+    'footer-address': 'Кахул, Торговый центр "Глобус", ул. 31 Августа 13Б',
+    'cart-title': 'Моя корзина',
+    'cart-total': 'Итого:',
+    'cart-empty': 'Ваша корзина пуста',
+    'cart-checkout': 'Оформить заказ',
+    'cart-return': 'Вернуться в каталог',
+    'modal-title': 'Оформление заказа',
+    'modal-name': 'Имя Фамилия *',
+    'modal-phone': 'Телефон *',
+    'modal-email': 'Email *',
+    'modal-address': 'Адрес доставки *',
+    'modal-comments': 'Комментарии',
+    'modal-confirm': 'Подтвердить заказ',
+    'catalog-platouri': 'Деревянные блюда',
+    'catalog-oale': 'Глиняные горшки',
+    'catalog-vinoteca': 'Винотека',
+    'catalog-title': 'Каталог',
+    'product-add': 'Добавить в корзину',
+    'notification-added': 'Добавлено в корзину',
+    'notification-view-cart': 'Просмотр корзины',
+    'product-details': 'Детали:',
+    'product-size': 'Размер:',
+    'product-description': 'Описание:',
+    'product-currency': 'MDL'
   },
   en: {
     'header-about': 'About Us',
@@ -325,13 +376,42 @@ const translations = {
     'footer-services': 'Services',
     'footer-contact': 'ARTIZANAT CAHUL',
     'footer-phone': '+(373) 60 132 630',
-    'footer-address': 'Cahul, Globus Shopping Center, 31 August 13B'
+    'footer-address': 'Cahul, Globus Shopping Center, 31 August 13B',
+    'cart-title': 'My Cart',
+    'cart-total': 'Total:',
+    'cart-empty': 'Your cart is empty',
+    'cart-checkout': 'Checkout',
+    'cart-return': 'Back to catalog',
+    'modal-title': 'Complete Order',
+    'modal-name': 'Full Name *',
+    'modal-phone': 'Phone *',
+    'modal-email': 'Email *',
+    'modal-address': 'Delivery Address *',
+    'modal-comments': 'Comments',
+    'modal-confirm': 'Confirm Order',
+    'catalog-platouri': 'Wooden Platters',
+    'catalog-oale': 'Clay Pots',
+    'catalog-vinoteca': 'Wine Racks',
+    'catalog-title': 'Catalog',
+    'product-add': 'Add to Cart',
+    'notification-added': 'Added to Cart',
+    'notification-view-cart': 'View Cart',
+    'product-details': 'Details:',
+    'product-size': 'Size:',
+    'product-description': 'Description:',
+    'product-currency': 'MDL'
   }
 };
 
-// Initialize everything when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
     new Carousel();
     new LanguageManager(translations);
     new MobileNav();
+
+    document.querySelectorAll('.social-link').forEach(button => {
+        button.addEventListener('click', () => {
+            const url = button.dataset.socialUrl;
+            if (url) window.open(url, '_blank', 'noopener,noreferrer');
+        });
+    });
 });
